@@ -97,14 +97,14 @@ class KeyboardUtilsImpl(private val activity: Activity) : KeyboardUtils {
     }
     
     private fun registerKeyboardListener() {
-        parentView.viewTreeObserver?.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener () {
-            fun onGlobalLayout() {
-                val r: Rect = Rect()
+        parentView.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            private val r: Rect = Rect()
+            override fun onGlobalLayout() {
                 // Conclude whether the keyboard is shown or not.
                 parentView.getWindowVisibleDisplayFrame(r)
                 var screenHeight = parentView.rootView.height
                 var heightDiff = screenHeight - (r.bottom - r.top)
-                
+
                 // 0.15 ratio is perhaps enough to determine keypad height.
                 if (heightDiff > 100) { 
                     keyboardOpenedEvent(heightDiff)
