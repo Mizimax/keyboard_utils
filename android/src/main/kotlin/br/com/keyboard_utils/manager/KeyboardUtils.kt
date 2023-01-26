@@ -3,6 +3,8 @@ package br.com.keyboard_utils.manager
 import android.app.Activity
 import android.os.CountDownTimer
 import android.view.View
+import android.view.ViewTreeObserver
+import android.graphics.Rect
 
 /**
  * Created by Wilson Martins on 2019-10-25.
@@ -95,9 +97,9 @@ class KeyboardUtilsImpl(private val activity: Activity) : KeyboardUtils {
     }
     
     private fun registerKeyboardListener() {
-        parentView.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            private val r: Rect = Rect()
-            override fun onGlobalLayout() {
+        parentView.viewTreeObserver?.addOnGlobalLayoutListener(ViewTreeObserver.OnGlobalLayoutListener () {
+            fun onGlobalLayout() {
+                val r: Rect = Rect()
                 // Conclude whether the keyboard is shown or not.
                 parentView.getWindowVisibleDisplayFrame(r)
                 var screenHeight = parentView.rootView.height
