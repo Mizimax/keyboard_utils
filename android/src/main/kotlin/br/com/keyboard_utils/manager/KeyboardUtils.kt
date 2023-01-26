@@ -106,7 +106,7 @@ class KeyboardUtilsImpl(private val activity: Activity) : KeyboardUtils {
                 var heightDiff = screenHeight - (r.bottom - r.top)
                 
                 // 0.15 ratio is perhaps enough to determine keypad height.
-                if (heightDiff > screenHeight * 0.15) { 
+                if (heightDiff > 100) { 
                     keyboardOpenedEvent(heightDiff)
                 }
                 else {
